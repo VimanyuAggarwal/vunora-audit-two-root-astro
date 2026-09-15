@@ -1,0 +1,15 @@
+---
+import Layout from '../../layouts/Layout.astro'
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'es' } }]
+}
+---
+
+<Layout title="About, prefixed">
+  <main>
+    <h1>About, prefixed</h1>
+    <h2>The locale spelling of the about page</h2>
+    <p>Its route is the locale family, so it is a sibling and not a duplicate.</p>
+  </main>
+</Layout>

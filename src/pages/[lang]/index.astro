@@ -1,0 +1,15 @@
+---
+import Layout from '../../layouts/Layout.astro'
+
+export function getStaticPaths() {
+  return [{ params: { lang: 'en' } }, { params: { lang: 'es' } }]
+}
+---
+
+<Layout title="Prefixed home">
+  <main>
+    <h1>Prefixed home</h1>
+    <h2>Served under a locale segment</h2>
+    <p>This file answers the locale family and never the bare slash.</p>
+  </main>
+</Layout>
