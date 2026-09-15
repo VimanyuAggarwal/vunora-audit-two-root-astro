@@ -1,4 +1,7 @@
 ---
+import { fetchPage, useFields } from '../../lib/vunora'
+  const { data: cmsPage } = await fetchPage('home', Astro.currentLocale, Astro.cookies.get('supercms_visitor_id')?.value)
+  const f = useFields(cmsPage)
 import Layout from '../../layouts/Layout.astro'
 
 export function getStaticPaths() {
@@ -6,10 +9,14 @@ export function getStaticPaths() {
 }
 ---
 
-<Layout title="Prefixed home">
+<Layout title={f.layout_title_1 ?? 'Prefixed home'}>
   <main>
-    <h1>Prefixed home</h1>
-    <h2>Served under a locale segment</h2>
-    <p>This file answers the locale family and never the bare slash.</p>
+    <h1>{f.heading_2 ?? 'Prefixed home'}</h1>
+    <h2>{f.heading_3 ?? 'Served under a locale segment'}</h2>
+    <p>{f.para_1 ?? 'This file answers the locale family and never the bare slash.'}</p>
   </main>
 </Layout>
+<script>
+  // Vunora browser runtime
+  import '../../lib/vunora'
+</script>

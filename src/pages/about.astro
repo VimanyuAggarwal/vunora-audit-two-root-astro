@@ -1,11 +1,18 @@
 ---
+import { fetchPage, useFields } from '../lib/vunora'
+  const { data: cmsPage } = await fetchPage('about', Astro.currentLocale, Astro.cookies.get('supercms_visitor_id')?.value)
+  const f = useFields(cmsPage)
 import Layout from '../layouts/Layout.astro'
 ---
 
-<Layout title="About, unprefixed">
+<Layout title={f.layout_title_1 ?? 'About, unprefixed'}>
   <main>
-    <h1>About, unprefixed</h1>
-    <h2>One page per spelling</h2>
-    <p>The about pair proves a non-root pair seeds once on each spelling.</p>
+    <h1>{f.heading_2 ?? 'About, unprefixed'}</h1>
+    <h2>{f.heading_3 ?? 'One page per spelling'}</h2>
+    <p>{f.para_1 ?? 'The about pair proves a non-root pair seeds once on each spelling.'}</p>
   </main>
 </Layout>
+<script>
+  // Vunora browser runtime
+  import '../lib/vunora'
+</script>

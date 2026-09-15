@@ -1,11 +1,18 @@
 ---
+import { fetchPage, useFields } from '../lib/vunora'
+  const { data: cmsPage } = await fetchPage('index', Astro.currentLocale, Astro.cookies.get('supercms_visitor_id')?.value)
+  const f = useFields(cmsPage)
 import Layout from '../layouts/Layout.astro'
 ---
 
-<Layout title="Two root files">
+<Layout title={f.layout_title_1 ?? 'Two root files'}>
   <main>
-    <h1>Unprefixed home</h1>
-    <h2>Served at the site root</h2>
-    <p>This file is the only route on this repository that answers a bare slash.</p>
+    <h1>{f.heading_1 ?? 'Unprefixed home'}</h1>
+    <h2>{f.heading_2 ?? 'Served at the site root'}</h2>
+    <p>{f.para_1 ?? 'This file is the only route on this repository that answers a bare slash.'}</p>
   </main>
 </Layout>
+<script>
+  // Vunora browser runtime
+  import '../lib/vunora'
+</script>

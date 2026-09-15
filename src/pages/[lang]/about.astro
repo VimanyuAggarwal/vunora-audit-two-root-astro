@@ -1,4 +1,7 @@
 ---
+import { fetchPage, useFields } from '../../lib/vunora'
+  const { data: cmsPage } = await fetchPage('about', Astro.currentLocale, Astro.cookies.get('supercms_visitor_id')?.value)
+  const f = useFields(cmsPage)
 import Layout from '../../layouts/Layout.astro'
 
 export function getStaticPaths() {
@@ -6,10 +9,14 @@ export function getStaticPaths() {
 }
 ---
 
-<Layout title="About, prefixed">
+<Layout title={f.layout_title_1 ?? 'About, prefixed'}>
   <main>
-    <h1>About, prefixed</h1>
-    <h2>The locale spelling of the about page</h2>
-    <p>Its route is the locale family, so it is a sibling and not a duplicate.</p>
+    <h1>{f.heading_2 ?? 'About, prefixed'}</h1>
+    <h2>{f.heading_3 ?? 'The locale spelling of the about page'}</h2>
+    <p>{f.para_1 ?? 'Its route is the locale family, so it is a sibling and not a duplicate.'}</p>
   </main>
 </Layout>
+<script>
+  // Vunora browser runtime
+  import '../../lib/vunora'
+</script>
